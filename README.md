@@ -6,5 +6,10 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 
 ## Setup
 0. Figure out an implementation for the [server](https://github.com/KhaosT/open-apollo/blob/master/Server.md).
-1. Replace all the placeholders in the project with real information.
-2. Build & Run :)
+1. Register an App at https://developer.spotify.com/dashboard/applications
+	- Enter your App Bundle ID and App Redirect URI under settings
+2. Replace all the placeholders in the project with real information.
+	- Go to Apollo/Configuration
+	- In `DefaultServiceConfiguration.swift` enter your server endpoints
+	- In `SpotifyAuthorizationContext.swift` enter your Spotify Client ID, App URL-Scheme and App Redirect URI
+3. Build & Run :)

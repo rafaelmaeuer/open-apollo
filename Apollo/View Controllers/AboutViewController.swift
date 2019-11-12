@@ -68,6 +68,9 @@ extension AboutViewController: UITableViewDataSource {
         case .developer:
             cell.detailTextLabel?.text = item.content as? String
             cell.accessoryType = .disclosureIndicator
+        case .maintainer:
+            cell.detailTextLabel?.text = item.content as? String
+            cell.accessoryType = .disclosureIndicator
         case .email:
             cell.detailTextLabel?.text = nil
             cell.accessoryType = .none
@@ -105,6 +108,7 @@ extension AboutViewController: UITableViewDelegate {
             return false
         case .acknowledgements,
              .developer,
+             .maintainer,
              .privacy,
              .email:
             return true
@@ -119,6 +123,8 @@ extension AboutViewController: UITableViewDelegate {
             break
         case .developer:
             UIApplication.shared.open(URL(string: "https://twitter.com/KhaosT")!, options: [:], completionHandler: nil)
+        case .maintainer:
+            UIApplication.shared.open(URL(string: "https://twitter.com/rafaelmaeuer")!, options: [:], completionHandler: nil)
         case .email:
             presentEmailViewController()
         case .acknowledgements:
@@ -216,6 +222,9 @@ extension AboutViewController {
         let developerRow = ListableRow<ListableType>(type: .developer, title: "Developer", cellIdentifier: "Cell", content: "@KhaosT")
         developerSection.associatedRows.append(developerRow)
         
+        let maintainerRow = ListableRow<ListableType>(type: .maintainer, title: "Maintainer", cellIdentifier: "Cell", content: "@rafaelmaeuer")
+        developerSection.associatedRows.append(maintainerRow)
+        
         let emailRow = ListableRow<ListableType>(type: .email, title: "Submit Feedback", cellIdentifier: "Cell")
         developerSection.associatedRows.append(emailRow)
         
@@ -253,6 +262,7 @@ extension AboutViewController {
     enum ListableType {
         case version
         case developer
+        case maintainer
         case email
         case acknowledgements
         case privacy

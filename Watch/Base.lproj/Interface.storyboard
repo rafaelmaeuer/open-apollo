@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
-    <device id="watch40" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15505" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
+    <device id="watch40"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -443,7 +442,7 @@
                 <controller identifier="Initialization" id="lmt-8M-VN1" customClass="InitializationInterfaceController" customModule="Watch_Extension">
                     <items>
                         <imageView alignment="center" verticalAlignment="center" image="Loading" animationDuration="1" id="RAT-1E-0bC"/>
-                        <label alignment="center" verticalAlignment="center" text="Updating…" textAlignment="center" id="Na5-EP-2iz">
+                        <label alignment="center" verticalAlignment="center" text="Loading…" textAlignment="center" id="Na5-EP-2iz">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
                         <button alignment="center" verticalAlignment="bottom" id="y9j-mB-zT4">
@@ -479,7 +478,7 @@
                                 <items>
                                     <group width="1" alignment="center" verticalAlignment="center" layout="vertical" radius="6" id="WuP-Sq-lA5">
                                         <items>
-                                            <imageView alignment="center" verticalAlignment="center" image="Loading1" contentMode="scaleAspectFill" id="ZbM-bI-QGj"/>
+                                            <imageView alignment="center" verticalAlignment="center" image="Loading" animationDuration="1" id="ZbM-bI-QGj"/>
                                         </items>
                                     </group>
                                     <label alignment="center" verticalAlignment="bottom" text="{Playlist}" textAlignment="center" id="xvK-Le-nv3">
@@ -723,5 +722,18 @@
             <point key="canvasLocation" x="414" y="728"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Browse" width="24" height="24"/>
+        <image name="Download-Small" width="24" height="24"/>
+        <image name="Loading" width="16" height="16"/>
+        <image name="Next" width="36" height="36"/>
+        <image name="Offline-Small" width="24" height="24"/>
+        <image name="Play" width="36" height="36"/>
+        <image name="Playing0" width="32" height="32"/>
+        <image name="Playlists" width="24" height="24"/>
+        <image name="Previous" width="36" height="36"/>
+        <image name="Search" width="24" height="24"/>
+        <image name="Storage" width="24" height="24"/>
+    </resources>
     <color key="tintColor" red="0.33340213982269723" green="0.84863055327216985" blue="0.29379630977211096" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

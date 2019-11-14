@@ -74,7 +74,7 @@ extension PlaylistOverviewInterfaceController {
         }
 
         imageView.setImageNamed("Loading")
-        imageView.startAnimatingWithImages(in: NSRange(location: 0, length: 60), duration: 1.0, repeatCount: 0)
+        imageView.startAnimatingWithImages(in: NSRange(0..<34), duration: 1.0, repeatCount: 0)
         
         imageTask = ArtworkService.shared.requestArtwork(
             from: playlist.images,

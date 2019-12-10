@@ -155,33 +155,44 @@ extension SpotifyAudioTrack {
     func didFinishPrepare(_ trackFileInfo: TrackFileInfo) {
         self.trackFileInfo = trackFileInfo
         
-        if let trackKey = KeychainServices.shared.decrypt(trackFileInfo.trackKeyData) {
-            let optionalAudioFile = AudioFile(
-                AudioFile.storageLocation(for: trackFileInfo),
-                fileInfo: trackFileInfo,
-                audioKeyData: trackKey
-            )
+        if (trackFileInfo.fileId == "") {
             
-            guard let audioFile = optionalAudioFile else {
-                log("An error has occurred while trying to play \"\(track.name)\".\n\nThe encryption key might be wrong for the audio file.")
-                NSLog("AudioFile Creation Error")
-                return
-            }
-            
-            self.audioFile = audioFile
-            self.decoder = VorbisDecoder(audioFile: audioFile)
-            
-            if audioFile.isCompleted {
-                self.decoder?.dataSourceDidFinishLoading()
-                self.eventDelegate?.audioTrack(self, handleEvent: .haveAdditionalContent)
-            } else {
-                self.playbackService.loadAudioTrack(self, trackFileInfo: trackFileInfo, incrementalOffset: audioFile.availableLength)
-            }
-        } else {
-            // TODO: handle error
+            // handle case when fileId is not found by librespot
             self.eventDelegate?.audioTrack(self, handleEvent: .encounteredUnrecoverableError)
-            log("An error has occurred while trying to play \"\(track.name)\".\n\nUnable to locate encryption key for the audio file.")
-            NSLog("Audio Track Key Unwrap Error")
+            log("An error has occurred while trying to play \"\(track.name)\".\n\nFailed to load data for the audio file.")
+            NSLog("Missing FileId Error")
+            
+        } else {
+        
+            if let trackKey = KeychainServices.shared.decrypt(trackFileInfo.trackKeyData) {
+                let optionalAudioFile = AudioFile(
+                    AudioFile.storageLocation(for: trackFileInfo),
+                    fileInfo: trackFileInfo,
+                    audioKeyData: trackKey
+                )
+                
+                guard let audioFile = optionalAudioFile else {
+                    log("An error has occurred while trying to play \"\(track.name)\".\n\nThe encryption key might be wrong for the audio file.")
+                    NSLog("AudioFile Creation Error")
+                    return
+                }
+                
+                self.audioFile = audioFile
+                self.decoder = VorbisDecoder(audioFile: audioFile)
+                
+                if audioFile.isCompleted {
+                    self.decoder?.dataSourceDidFinishLoading()
+                    self.eventDelegate?.audioTrack(self, handleEvent: .haveAdditionalContent)
+                } else {
+                    self.playbackService.loadAudioTrack(self, trackFileInfo: trackFileInfo, incrementalOffset: audioFile.availableLength)
+                }
+            } else {
+                // TODO: handle error
+                self.eventDelegate?.audioTrack(self, handleEvent: .encounteredUnrecoverableError)
+                log("An error has occurred while trying to play \"\(track.name)\".\n\nUnable to locate encryption key for the audio file.")
+                NSLog("Audio Track Key Unwrap Error")
+            }
+
         }
         
         self.isPreparing = false

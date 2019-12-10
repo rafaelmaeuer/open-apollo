@@ -82,11 +82,11 @@ class HelloViewController: StepViewController {
     @objc
     private func didTapSignOut() {
         let alert = UIAlertController(title: "Sign Out?", message: "Are you sure you want to sign out?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: nil))
         alert.addAction(
             UIAlertAction(
                 title: "Yes",
-                style: .destructive,
+                style: .cancel,
                 handler: { _ in
                     ConfigurationServices.shared.currentConfiguration = nil
                     WatchCommunicationManager.shared.syncIfPossible()

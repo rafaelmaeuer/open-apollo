@@ -10,7 +10,7 @@
         <!--Home-->
         <scene sceneID="dGL-qE-klD">
             <objects>
-                <controller identifier="Home" title="Home" id="HWe-PW-0Lp" customClass="HomeInterfaceController" customModule="Watch_Extension">
+                <controller identifier="Home" title="Home" alwaysBounce="YES" id="HWe-PW-0Lp" customClass="HomeInterfaceController" customModule="Watch_Extension">
                     <items>
                         <table alignment="left" hidden="YES" pagingScroll="YES" id="lwT-iP-gzo">
                             <items>

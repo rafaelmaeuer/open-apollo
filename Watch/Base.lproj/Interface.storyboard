@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15505" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
     <device id="watch40"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
@@ -56,21 +56,32 @@
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <button alignment="left" id="rnV-37-LDH">
-                            <group key="contentGroup" width="1" alignment="left" spacing="12" id="pkm-36-MQL">
-                                <items>
-                                    <imageView alignment="left" verticalAlignment="center" image="Playlists" id="f5C-m1-DXn"/>
-                                    <label alignment="left" verticalAlignment="center" text="Playlists" id="t4k-ET-ed3">
-                                        <fontDescription key="font" type="system" pointSize="15"/>
-                                    </label>
-                                </items>
-                                <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <edgeInsets key="margins" left="12" right="12" top="10" bottom="10"/>
-                            </group>
-                            <connections>
-                                <action selector="didTapPlaylistButton" destination="HWe-PW-0Lp" id="Hjg-Dh-jMa"/>
-                            </connections>
-                        </button>
+                        <group width="1" alignment="left" id="HaH-yk-Gku" userLabel="Playlist Group">
+                            <items>
+                                <button alignment="left" id="rnV-37-LDH">
+                                    <group key="contentGroup" width="1" alignment="left" spacing="12" id="pkm-36-MQL">
+                                        <items>
+                                            <imageView alignment="left" verticalAlignment="center" image="Playlists" id="f5C-m1-DXn"/>
+                                            <label alignment="left" verticalAlignment="center" text="Playlists" id="t4k-ET-ed3">
+                                                <fontDescription key="font" type="system" pointSize="15"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <edgeInsets key="margins" left="12" right="12" top="10" bottom="10"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapPlaylistButton" destination="HWe-PW-0Lp" id="Hjg-Dh-jMa"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <gestureRecognizers>
+                                <longPressGestureRecognizer id="TJY-9l-IQJ">
+                                    <connections>
+                                        <action selector="didLongPressPlaylistButton" destination="HWe-PW-0Lp" id="gZE-KY-Wu7"/>
+                                    </connections>
+                                </longPressGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
                         <button alignment="left" id="f2t-IJ-06c">
                             <group key="contentGroup" width="1" alignment="left" spacing="12" id="NjR-6Z-87e">
                                 <items>

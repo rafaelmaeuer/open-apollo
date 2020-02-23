@@ -101,6 +101,11 @@ extension HomeInterfaceController {
         playlistTable.performSegue(forRow: 0)
     }
     
+    @IBAction func didLongPressPlaylistButton() {
+        NSLog("Update playlists…")
+        updatePlaylists()
+    }
+    
     @IBAction func didTapExploreButton() {
         hasPendingPlaylistsRequest = false
         pushController(withName: "Explore", context: nil)
@@ -241,6 +246,7 @@ extension HomeInterfaceController {
                     strongSelf.didTapPlaylistButton()
                     strongSelf.hasPendingPlaylistsRequest = false
                 }
+                NSLog("Playlists updated")
             }
         }
     }

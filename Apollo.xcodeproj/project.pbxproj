@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5323FE8224731E0200B62241 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC7EB77C215F4F23006713B5 /* Ogg.framework */; };
 		CC10489D217340E600DBD8F0 /* NowPlayingInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC10489C217340E600DBD8F0 /* NowPlayingInterfaceController.swift */; };
 		CC2330D32517FF4200F13316 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC7EB77C215F4F23006713B5 /* Ogg.framework */; };
 		CC2330D42517FF4200F13316 /* Ogg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CC7EB77C215F4F23006713B5 /* Ogg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -366,7 +367,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CC2330D52517FF4200F13316 /* PBXContainerItemProxy */ = {
+		5323FE8424731E0200B62241 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCF8D76E215B6D47001CDEFD /* Project object */;
 			proxyType = 1;
@@ -751,7 +752,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC2330D32517FF4200F13316 /* Ogg.framework in Frameworks */,
+				5323FE8224731E0200B62241 /* Ogg.framework in Frameworks */,
 				CCE124DC2162022A0012D2AB /* AudioKit.framework in Frameworks */,
 				CCE124BE2161F7300012D2AB /* Vorbis.framework in Frameworks */,
 			);
@@ -1715,7 +1716,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CC2330D62517FF4200F13316 /* PBXTargetDependency */,
+				5323FE8524731E0200B62241 /* PBXTargetDependency */,
 			);
 			name = "SpotifyServices watchOS";
 			productName = SpotifyServices;
@@ -2333,10 +2334,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CC2330D62517FF4200F13316 /* PBXTargetDependency */ = {
+		5323FE8524731E0200B62241 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CC7EB773215F4F23006713B5 /* Ogg watchOS */;
-			targetProxy = CC2330D52517FF4200F13316 /* PBXContainerItemProxy */;
+			targetProxy = 5323FE8424731E0200B62241 /* PBXContainerItemProxy */;
 		};
 		CC7EB708215F2935006713B5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

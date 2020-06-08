@@ -277,7 +277,7 @@ extension LocalStorageManager {
 
 extension LocalStorageManager {
     
-    public func evictTemporaryStorage() {
+    public func evictTemporaryStorage() -> Bool {
         do {
             if FileManager.default.fileExists(atPath: audioFileStorageLocation(for: .temporary).path) {
                 try FileManager.default.removeItem(at: audioFileStorageLocation(for: .temporary))
@@ -294,12 +294,14 @@ extension LocalStorageManager {
             if FileManager.default.fileExists(atPath: artworkStorageLocation(for: .temporary).path) {
                 try FileManager.default.removeItem(at: artworkStorageLocation(for: .temporary))
             }
+            return true
         } catch {
             NSLog("Cache Eviction Error: \(error)")
+            return false
         }
     }
     
-    public func evictDownloadStorage() {
+    public func evictDownloadStorage() -> Bool {
         do {
             if FileManager.default.fileExists(atPath: audioFileStorageLocation(for: .download).path) {
                 try FileManager.default.removeItem(at: audioFileStorageLocation(for: .download))
@@ -316,8 +318,10 @@ extension LocalStorageManager {
             if FileManager.default.fileExists(atPath: artworkStorageLocation(for: .download).path) {
                 try FileManager.default.removeItem(at: artworkStorageLocation(for: .download))
             }
+            return true
         } catch {
             NSLog("Download Eviction Error: \(error)")
+            return false
         }
     }
 }

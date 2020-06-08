@@ -103,7 +103,7 @@ extension HomeInterfaceController {
     
     @IBAction func didLongPressPlaylistButton() {
         NSLog("Update playlists…")
-        updatePlaylists()
+        updatePlaylists(autoUpdate: false)
     }
     
     @IBAction func didTapExploreButton() {
@@ -141,6 +141,16 @@ extension HomeInterfaceController {
     @objc
     private func openSettings() {
         pushController(withName: "Settings", context: nil)
+    }
+    
+    func showPopup(context: String, success: Bool){
+
+        let title = success ? "Success" : "Error"
+        let text = context + (success ? " updated" : " update failed")
+        let h0 = { print(text) }
+        let action = WKAlertAction(title: "Ok", style: .cancel, handler:h0)
+
+        presentAlert(withTitle: title, message: "\n" + text, preferredStyle: .actionSheet, actions: [action])
     }
 }
 
@@ -209,7 +219,7 @@ extension HomeInterfaceController {
         noPlaylistGroup.setHidden(true)
         
         lastUpdatedAt = Date()
-        updatePlaylists()
+        updatePlaylists(autoUpdate: true)
         updateSearchSuggestions()
     }
     
@@ -223,9 +233,12 @@ extension HomeInterfaceController {
         }
     }
     
-    private func updatePlaylists() {
+    private func updatePlaylists(autoUpdate: Bool) {
         SpotifyServiceProvider.shared.getPlaylists { [weak self] result in
             guard let strongSelf = self, case .success(let playlists) = result else {
+                if (!autoUpdate) {
+                    self?.showPopup(context:"Playlists", success:false)
+                }
                 return
             }
             
@@ -247,6 +260,9 @@ extension HomeInterfaceController {
                     strongSelf.hasPendingPlaylistsRequest = false
                 }
                 NSLog("Playlists updated")
+                if (!autoUpdate) {
+                    self?.showPopup(context:"Playlists", success:true)
+                }
             }
         }
     }

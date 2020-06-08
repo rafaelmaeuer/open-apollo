@@ -24,21 +24,22 @@ class StorageSettingsInterfaceController: WKInterfaceController {
     }
 
     @IBAction func didTapDeleteCache() {
-        LocalStorageManager.shared.evictTemporaryStorage()
-        showPopup(context: "Cache")
+        let deleted:Bool = LocalStorageManager.shared.evictTemporaryStorage()
+        showPopup(context: "Cache", success:deleted)
     }
     
     @IBAction func didTapDeleteDownload() {
-        LocalStorageManager.shared.evictDownloadStorage()
-        showPopup(context: "Downloads")
+        let deleted:Bool = LocalStorageManager.shared.evictDownloadStorage()
+        showPopup(context: "Downloads", success:deleted)
     }
     
-    func showPopup(context: String){
+    func showPopup(context: String, success: Bool){
 
-        let text = context + " deleted"
+        let title = success ? "Success" : "Error"
+        let text = context + (success ? " deleted" : " deletion failed")
         let h0 = { print(text) }
         let action = WKAlertAction(title: "Ok", style: .cancel, handler:h0)
 
-        presentAlert(withTitle: "Success", message: "\n" + text, preferredStyle: .actionSheet, actions: [action])
+        presentAlert(withTitle: title, message: "\n" + text, preferredStyle: .actionSheet, actions: [action])
     }
 }

@@ -8,7 +8,7 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 
 ## Setup
 
-1. Figure out an implementation for the [server](Server.md).
+1. Figure out an implementation for the [server](Server.md) e.g. [open-apollo-server](https://github.com/lgruen/open-apollo-server)
 
 2. Register an App at https://developer.spotify.com/dashboard/applications
     - Enter your App Bundle ID and App Redirect URI under settings
@@ -27,5 +27,7 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 - [X] Handle error if FileID is not found
 - [X] Confirmation popups on local storage deletion
 - [X] Update playlists with long press on playlists button
+- [X] Add Feedback view for update or deletion
+- [ ] Add playlist update for downloads in settings
 - [ ] Set audio quality in settings (320/160 kbits)
 - [ ] Add cover art in background of audio player

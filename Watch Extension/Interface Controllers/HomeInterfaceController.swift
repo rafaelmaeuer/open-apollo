@@ -27,6 +27,7 @@ class HomeInterfaceController: WKInterfaceController {
     @IBOutlet weak var exploreButton: WKInterfaceButton!
     @IBOutlet weak var searchButton: WKInterfaceButton!
     @IBOutlet weak var downloadsButton: WKInterfaceButton!
+    @IBOutlet weak var settingsButton: WKInterfaceButton!
     
     @IBOutlet weak var noPlaylistGroup: WKInterfaceGroup!
     
@@ -52,6 +53,13 @@ class HomeInterfaceController: WKInterfaceController {
             object: DownloadManager.shared
         )
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateMenuItems),
+            name: .appStateOfflineChange,
+            object: nil
+        )
+        
         if nowPlayingItemController == nil {
             nowPlayingItemController = NowPlayingItemController(
                 itemGroup: nowPlayingItemGroup,
@@ -74,6 +82,12 @@ class HomeInterfaceController: WKInterfaceController {
             self,
             name: .downloadManagerTaskChanges,
             object: DownloadManager.shared
+        )
+        
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .appStateOfflineChange,
+            object: SettingsInterfaceController.self
         )
         
         SpotifyPlayer.shared.unregisterPlayerEventProcessor(nowPlayingItemController!)
@@ -130,17 +144,16 @@ extension HomeInterfaceController {
         pushController(withName: "Downloads", context: nil)
     }
     
+    @IBAction func didTapSettingsButton() {
+        pushController(withName: "Settings", context: nil)
+    }
+    
     @objc
     private func toggleMode() {
         AppSession.shared.offline.toggle()
         lastUpdatedAt = nil
-        updateMenuItems()
+        //updateMenuItems()
         updateIfNecessary()
-    }
-    
-    @objc
-    private func openSettings() {
-        pushController(withName: "Settings", context: nil)
     }
     
     func showPopup(context: String, success: Bool){
@@ -158,16 +171,19 @@ extension HomeInterfaceController {
 
 extension HomeInterfaceController {
     
+    @objc
     private func updateMenuItems() {
-        clearAllMenuItems()
         
-        if AppSession.shared.offline {
-            addMenuItem(withImageNamed: "Stream", title: "Stream Mode", action: #selector(toggleMode))
-        } else {
-            addMenuItem(withImageNamed: "Offline", title: "Offline Mode", action: #selector(toggleMode))
+        // Toggle if state is offline and settings set online
+        if (AppSession.shared.offline && !UserPreferences.offline) {
+            toggleMode()
         }
         
-        addMenuItem(with: .more, title: "Settings", action: #selector(openSettings))
+        // Toggle if state is online and settings set offline
+        if (!AppSession.shared.offline && UserPreferences.offline) {
+            toggleMode()
+        }
+
     }
 }
 

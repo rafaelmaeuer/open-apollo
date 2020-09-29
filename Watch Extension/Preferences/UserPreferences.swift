@@ -19,4 +19,15 @@ class UserPreferences {
             return UserDefaults.standard.bool(forKey: "enableShuffle")
         }
     }
+    
+    static var offline: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "offlineMode")
+        }
+        
+        get {
+            return UserDefaults.standard.bool(forKey: "offlineMode")
+        }
+    }
+    
 }

@@ -12,11 +12,13 @@ import Foundation
 class SettingsInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var shuffleSwitch: WKInterfaceSwitch!
+    @IBOutlet weak var offlineSwitch: WKInterfaceSwitch!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         shuffleSwitch.setOn(UserPreferences.shuffle)
+        offlineSwitch.setOn(UserPreferences.offline)
     }
 
     override func willActivate() {
@@ -46,4 +48,16 @@ extension SettingsInterfaceController {
     @IBAction func didToggleShuffle(_ value: Bool) {
         UserPreferences.shuffle = value
     }
+    
+    @IBAction func didToggleOffline(_ value: Bool) {
+        UserPreferences.offline = value
+        NotificationCenter.default.post(name: .appStateOfflineChange, object: nil)
+    }
+}
+
+// MARK: - Update
+
+extension NSNotification.Name {
+    
+    public static let appStateOfflineChange = NSNotification.Name("AppStateOfflineChanged")
 }

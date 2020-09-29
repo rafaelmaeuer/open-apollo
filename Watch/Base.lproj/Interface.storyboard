@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17156" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
     <device id="watch40"/>
     <dependencies>
-        <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17034"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -127,6 +126,21 @@
                                 <action selector="didTapDownloadsButton" destination="HWe-PW-0Lp" id="jpg-gq-jDq"/>
                             </connections>
                         </button>
+                        <button alignment="left" id="wCm-tT-FMw" userLabel="Settings Button">
+                            <group key="contentGroup" width="1" alignment="left" spacing="12" id="e6o-WR-ZSJ">
+                                <items>
+                                    <imageView alignment="left" verticalAlignment="center" image="Settings" id="wkJ-YW-yYg" userLabel="Settings"/>
+                                    <label alignment="left" verticalAlignment="center" text="Settings" id="WRA-tr-lpW" userLabel="Settings">
+                                        <fontDescription key="font" type="system" pointSize="15"/>
+                                    </label>
+                                </items>
+                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="margins" left="12" right="12" top="10" bottom="10"/>
+                            </group>
+                            <connections>
+                                <action selector="didTapSettingsButton" destination="HWe-PW-0Lp" id="3Fb-nZ-exc"/>
+                            </connections>
+                        </button>
                         <group width="1" alignment="center" verticalAlignment="center" hidden="YES" layout="vertical" id="lvU-3W-udQ">
                             <items>
                                 <label alignment="center" verticalAlignment="center" text="No Playlist" id="hMn-Kx-5N4">
@@ -149,6 +163,7 @@
                         <outlet property="playlistsButtonImage" destination="f5C-m1-DXn" id="R5G-Rs-YHP"/>
                         <outlet property="playlistsButtonText" destination="t4k-ET-ed3" id="guy-NB-xSb"/>
                         <outlet property="searchButton" destination="sJ4-7q-hrN" id="Wr4-1x-FGN"/>
+                        <outlet property="settingsButton" destination="wCm-tT-FMw" id="1n3-X9-tjC"/>
                     </connections>
                 </controller>
             </objects>
@@ -399,8 +414,14 @@
                                 <action selector="didToggleShuffle:" destination="axV-5O-ytJ" id="PMW-2U-B8q"/>
                             </connections>
                         </switch>
+                        <switch width="1" alignment="left" title="Offline" id="Lhd-Q3-GIg" userLabel="Offline Switch">
+                            <connections>
+                                <action selector="didToggleOffline:" destination="axV-5O-ytJ" id="Nt9-VF-xE9"/>
+                            </connections>
+                        </switch>
                     </items>
                     <connections>
+                        <outlet property="offlineSwitch" destination="Lhd-Q3-GIg" id="F4V-NG-Gf2"/>
                         <outlet property="shuffleSwitch" destination="4tb-4t-mOv" id="eFq-k2-eig"/>
                     </connections>
                 </controller>
@@ -425,7 +446,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="414" y="1006"/>
+            <point key="canvasLocation" x="414" y="1085"/>
         </scene>
         <!--Message-->
         <scene sceneID="Hf0-61-sfX">
@@ -733,6 +754,7 @@
             <point key="canvasLocation" x="414" y="728"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.33340213982269723" green="0.84863055327216985" blue="0.29379630977211096" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="Browse" width="24" height="24"/>
         <image name="Download-Small" width="24" height="24"/>
@@ -744,7 +766,7 @@
         <image name="Playlists" width="24" height="24"/>
         <image name="Previous" width="36" height="36"/>
         <image name="Search" width="24" height="24"/>
+        <image name="Settings" width="24" height="24"/>
         <image name="Storage" width="24" height="24"/>
     </resources>
-    <color key="tintColor" red="0.33340213982269723" green="0.84863055327216985" blue="0.29379630977211096" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

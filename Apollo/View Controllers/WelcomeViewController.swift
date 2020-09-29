@@ -117,6 +117,10 @@ extension WelcomeViewController: ASWebAuthenticationPresentationContextProviding
         )
         if #available(iOS 13.0, *) {
             session.presentationContextProvider = self
+            #if DEBUG
+            // Use private mode to prevent credential cookie
+            session.prefersEphemeralWebBrowserSession = true
+            #endif
         }
         authenticationSession = session
         

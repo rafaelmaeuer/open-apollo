@@ -559,7 +559,7 @@ extension AudioPlayer {
         
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playback, mode: .default, policy: .longForm, options: [])
+            try session.setCategory(.playback, mode: .default, policy: .longFormAudio, options: [])
             #if os(watchOS) && !targetEnvironment(simulator)
             session.activate(options: []) { [weak self] activated, error in
                 guard let strongSelf = self else {

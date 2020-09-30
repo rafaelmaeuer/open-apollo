@@ -23,7 +23,7 @@ class PlaylistOverviewInterfaceController: WKInterfaceController {
         
         if let context = context as? SimplifiedPlaylist {
             playlist = context
-            addMenuItem(withImageNamed: "Download", title: "Download", action: #selector(didTapDownload))
+            //addMenuItem(withImageNamed: "Download", title: "Download", action: #selector(didTapDownload))
         } else if let context = context as? Playlist {
             playlist = context
         } else {
@@ -32,13 +32,40 @@ class PlaylistOverviewInterfaceController: WKInterfaceController {
         
         configure()
     }
+    
+    override func willActivate() {
+        super.willActivate()
+    }
+
+    override func didDeactivate() {
+        super.didDeactivate()
+    }
 
     @IBAction func didTapPlaylist() {
         SpotifyPlayer.shared.playPlaylist(playlist, from: self)
     }
     
+    @IBAction func didLongPressPlaylist() {
+        showPopup()
+    }
+    
     deinit {
         imageTask?.cancel()
+    }
+
+    func showPopup(){
+        
+        let title = "Download"
+        let text = "\n" + playlist.name
+        let cancel = WKAlertAction.init(title: "Ok", style: .cancel, handler: {
+            print("Start Download")
+            self.didTapDownload()
+        })
+        let ok = WKAlertAction.init(title: "Cancel", style: .default, handler: {
+            print("Cancel Download")
+        })
+
+        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .actionSheet, actions: [ok,cancel])
     }
 }
 

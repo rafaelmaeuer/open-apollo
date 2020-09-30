@@ -16,6 +16,10 @@ class NowPlayingInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var playPauseButton: WKInterfaceButton!
     
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
+    }
+    
     override func willActivate() {
         super.willActivate()
         SpotifyPlayer.shared.registerPlayerEventProcessor(self)
@@ -42,6 +46,8 @@ class NowPlayingInterfaceController: WKInterfaceController {
     }
     
 }
+
+// MARK: - Audio Player
 
 extension NowPlayingInterfaceController: AudioPlayerEventProcessor {
     

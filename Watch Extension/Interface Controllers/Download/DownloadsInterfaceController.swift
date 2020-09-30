@@ -17,6 +17,7 @@ class DownloadsInterfaceController: WKInterfaceController {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleTaskUpdates),
@@ -24,7 +25,16 @@ class DownloadsInterfaceController: WKInterfaceController {
             object: DownloadManager.shared
         )
         
-        addMenuItem(with: .decline, title: "Cancel All", action: #selector(cancelAllDownloadTasks))
+        //TODO: Check why this is not working
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(cancelAllDownloadTasks),
+            name: .downloadManagerTaskStop,
+            object: nil
+        )
+        
+        //TODO: Find alternative for WatchOS7
+        //addMenuItem(with: .decline, title: "Cancel All", action: #selector(cancelAllDownloadTasks))
         updateTasks()
     }
 
@@ -82,6 +92,7 @@ extension DownloadsInterfaceController {
     private func updateTable() {
         tasksTable.setNumberOfRows(tasks.count, withRowType: "DownloadTask")
         
+        //TODO: when downloads complete notify MainInterfaceController to hide download button 
         for (idx, task) in tasks.enumerated() {
             let rowController = tasksTable.rowController(at: idx) as! DownloadTaskRowController
             rowController.configure(with: task)

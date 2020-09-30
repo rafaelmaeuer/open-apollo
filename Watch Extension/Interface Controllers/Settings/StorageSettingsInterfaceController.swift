@@ -36,10 +36,11 @@ class StorageSettingsInterfaceController: WKInterfaceController {
     func showPopup(context: String, success: Bool){
 
         let title = success ? "Success" : "Error"
-        let text = context + (success ? " deleted" : " deletion failed")
-        let h0 = { print(text) }
-        let action = WKAlertAction(title: "Ok", style: .cancel, handler:h0)
+        let text = "\n" + context + (success ? " deleted" : " deletion failed")
+        let action = WKAlertAction.init(title: "Ok", style: .default, handler: {
+            print("Dismissed")
+        })
 
-        presentAlert(withTitle: title, message: "\n" + text, preferredStyle: .actionSheet, actions: [action])
+        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .alert, actions: [action])
     }
 }

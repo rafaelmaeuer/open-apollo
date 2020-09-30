@@ -111,21 +111,32 @@
                                 <action selector="didTapSearchButton" destination="HWe-PW-0Lp" id="aF0-lz-ZH5"/>
                             </connections>
                         </button>
-                        <button alignment="left" hidden="YES" id="mlF-OO-Ghi">
-                            <group key="contentGroup" width="1" alignment="left" spacing="12" id="82j-Zk-NN6">
-                                <items>
-                                    <imageView alignment="left" verticalAlignment="center" image="Download-Small" id="1VT-Ac-SiK"/>
-                                    <label alignment="left" verticalAlignment="center" text="Downloads" id="wQp-j6-GfA">
-                                        <fontDescription key="font" type="system" pointSize="15"/>
-                                    </label>
-                                </items>
-                                <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <edgeInsets key="margins" left="12" right="12" top="10" bottom="10"/>
-                            </group>
-                            <connections>
-                                <action selector="didTapDownloadsButton" destination="HWe-PW-0Lp" id="jpg-gq-jDq"/>
-                            </connections>
-                        </button>
+                        <group width="1" alignment="left" hidden="YES" id="iO5-Iz-Rcf" userLabel="Download Group">
+                            <items>
+                                <button alignment="left" hidden="YES" id="mlF-OO-Ghi">
+                                    <group key="contentGroup" width="1" alignment="left" spacing="12" id="82j-Zk-NN6">
+                                        <items>
+                                            <imageView alignment="left" verticalAlignment="center" image="Download-Small" id="1VT-Ac-SiK"/>
+                                            <label alignment="left" verticalAlignment="center" text="Downloads" id="wQp-j6-GfA">
+                                                <fontDescription key="font" type="system" pointSize="15"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <edgeInsets key="margins" left="12" right="12" top="10" bottom="10"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="didTapDownloadsButton" destination="HWe-PW-0Lp" id="jpg-gq-jDq"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <gestureRecognizers>
+                                <longPressGestureRecognizer id="72X-Ka-l94">
+                                    <connections>
+                                        <action selector="didLongPressDownloadsButton" destination="HWe-PW-0Lp" id="MHt-cO-rmS"/>
+                                    </connections>
+                                </longPressGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
                         <button alignment="left" id="wCm-tT-FMw" userLabel="Settings Button">
                             <group key="contentGroup" width="1" alignment="left" spacing="12" id="e6o-WR-ZSJ">
                                 <items>
@@ -152,6 +163,7 @@
                     </items>
                     <connections>
                         <outlet property="downloadsButton" destination="mlF-OO-Ghi" id="f4q-rr-vFt"/>
+                        <outlet property="downloadsGroup" destination="iO5-Iz-Rcf" id="hcg-dr-OUZ"/>
                         <outlet property="exploreButton" destination="f2t-IJ-06c" id="DNz-rN-Fkc"/>
                         <outlet property="noPlaylistGroup" destination="lvU-3W-udQ" id="siY-S0-m5Y"/>
                         <outlet property="nowPlayingAnimationView" destination="r2O-Gi-PXj" id="g18-5e-EQU"/>
@@ -500,28 +512,39 @@
             </objects>
             <point key="canvasLocation" x="-254" y="-13"/>
         </scene>
-        <!--Playlist Overview-->
+        <!--Playlist-->
         <scene sceneID="U42-LC-7kh">
             <objects>
-                <controller identifier="Playlist Overview" hidesWhenLoading="NO" id="z20-MY-xRr" customClass="PlaylistOverviewInterfaceController" customModule="Watch_Extension">
+                <controller identifier="Playlist Overview" title="Playlist" id="z20-MY-xRr" customClass="PlaylistOverviewInterfaceController" customModule="Watch_Extension">
                     <items>
-                        <button alignment="center" verticalAlignment="center" id="6mC-uh-RdH">
-                            <group key="contentGroup" width="0.90000000000000002" alignment="left" layout="vertical" id="khZ-7U-mQS">
-                                <items>
-                                    <group width="1" alignment="center" verticalAlignment="center" layout="vertical" radius="6" id="WuP-Sq-lA5">
+                        <group width="1" alignment="center" verticalAlignment="center" id="eBw-3f-wp4" userLabel="Playlist Group">
+                            <items>
+                                <button alignment="center" verticalAlignment="center" id="6mC-uh-RdH">
+                                    <group key="contentGroup" width="0.90000000000000002" alignment="left" layout="vertical" id="khZ-7U-mQS">
                                         <items>
-                                            <imageView alignment="center" verticalAlignment="center" image="Loading" animationDuration="1" id="ZbM-bI-QGj"/>
+                                            <group width="1" alignment="center" verticalAlignment="center" layout="vertical" radius="6" id="WuP-Sq-lA5">
+                                                <items>
+                                                    <imageView alignment="center" verticalAlignment="center" image="Loading" animationDuration="1" id="ZbM-bI-QGj"/>
+                                                </items>
+                                            </group>
+                                            <label alignment="center" verticalAlignment="bottom" text="{Playlist}" textAlignment="center" id="xvK-Le-nv3">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
                                         </items>
                                     </group>
-                                    <label alignment="center" verticalAlignment="bottom" text="{Playlist}" textAlignment="center" id="xvK-Le-nv3">
-                                        <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
-                                    </label>
-                                </items>
-                            </group>
-                            <connections>
-                                <action selector="didTapPlaylist" destination="z20-MY-xRr" id="zPT-gE-yHe"/>
-                            </connections>
-                        </button>
+                                    <connections>
+                                        <action selector="didTapPlaylist" destination="z20-MY-xRr" id="zPT-gE-yHe"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <gestureRecognizers>
+                                <longPressGestureRecognizer id="rfI-Me-f2W">
+                                    <connections>
+                                        <action selector="didLongPressPlaylist" destination="z20-MY-xRr" id="MyN-oI-VIa"/>
+                                    </connections>
+                                </longPressGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="imageView" destination="ZbM-bI-QGj" id="sPL-En-459"/>
@@ -531,10 +554,10 @@
             </objects>
             <point key="canvasLocation" x="414" y="-13"/>
         </scene>
-        <!--Download Playlist-->
+        <!--Download-->
         <scene sceneID="csa-XA-deN">
             <objects>
-                <controller identifier="Download Playlist" id="fqo-pR-kKA" customClass="DownloadPlaylistInterfaceController" customModule="Watch_Extension">
+                <controller identifier="Download Playlist" title="Download" id="fqo-pR-kKA" customClass="DownloadPlaylistInterfaceController" customModule="Watch_Extension">
                     <items>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="u97-kA-rco">
                             <items>
@@ -665,10 +688,10 @@
             </objects>
             <point key="canvasLocation" x="761" y="365"/>
         </scene>
-        <!--Downloads-->
+        <!--Download-->
         <scene sceneID="vpd-FL-Xqe">
             <objects>
-                <controller identifier="Downloads" title="Downloads" id="gY2-5E-lOp" customClass="DownloadsInterfaceController" customModule="Watch_Extension">
+                <controller identifier="Downloads" title="Download" id="gY2-5E-lOp" customClass="DownloadsInterfaceController" customModule="Watch_Extension">
                     <items>
                         <table alignment="center" id="uiv-eo-tec">
                             <items>
@@ -699,10 +722,10 @@
             </objects>
             <point key="canvasLocation" x="761" y="728"/>
         </scene>
-        <!--Now Playing-->
+        <!--Player-->
         <scene sceneID="omc-Kb-yTU">
             <objects>
-                <controller identifier="Now Playing" fullBounds="YES" id="fDA-2j-mPB" customClass="NowPlayingInterfaceController" customModule="Watch_Extension">
+                <controller identifier="Now Playing" title="Player" fullBounds="YES" id="fDA-2j-mPB" customClass="NowPlayingInterfaceController" customModule="Watch_Extension">
                     <items>
                         <group width="1" alignment="center" layout="vertical" spacing="0.0" id="AU1-vC-bAP">
                             <items>

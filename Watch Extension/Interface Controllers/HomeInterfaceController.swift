@@ -27,6 +27,7 @@ class HomeInterfaceController: WKInterfaceController {
     @IBOutlet weak var exploreButton: WKInterfaceButton!
     @IBOutlet weak var searchButton: WKInterfaceButton!
     @IBOutlet weak var downloadsButton: WKInterfaceButton!
+    @IBOutlet weak var downloadsGroup: WKInterfaceGroup!
     @IBOutlet weak var settingsButton: WKInterfaceButton!
     
     @IBOutlet weak var noPlaylistGroup: WKInterfaceGroup!
@@ -87,7 +88,7 @@ class HomeInterfaceController: WKInterfaceController {
         NotificationCenter.default.removeObserver(
             self,
             name: .appStateOfflineChange,
-            object: SettingsInterfaceController.self
+            object: SettingsInterfaceController.self // Magic: don't set nil 🎉
         )
         
         SpotifyPlayer.shared.unregisterPlayerEventProcessor(nowPlayingItemController!)
@@ -144,6 +145,13 @@ extension HomeInterfaceController {
         pushController(withName: "Downloads", context: nil)
     }
     
+    @IBAction func didLongPressDownloadsButton() {
+        NSLog("Stop Downloads…")
+        //TODO: Check why this is not working
+        NotificationCenter.default.post(name: .downloadManagerTaskStop, object: nil)
+        //showDownloadPopup()
+    }
+    
     @IBAction func didTapSettingsButton() {
         pushController(withName: "Settings", context: nil)
     }
@@ -156,15 +164,30 @@ extension HomeInterfaceController {
         updateIfNecessary()
     }
     
-    func showPopup(context: String, success: Bool){
+    private func showPlaylistPopup(context: String, success: Bool){
 
         let title = success ? "Success" : "Error"
-        let text = context + (success ? " updated" : " update failed")
-        let h0 = { print(text) }
-        let action = WKAlertAction(title: "Ok", style: .cancel, handler:h0)
-
-        presentAlert(withTitle: title, message: "\n" + text, preferredStyle: .actionSheet, actions: [action])
+        let text = "\n" + context + (success ? " updated" : " update failed")
+        let action = WKAlertAction.init(title: "Ok", style: .default, handler: {
+            print("Dismissed")
+        })
+        
+        //TODO: visibleInterfaceController not working after reloadRootPageControllers
+        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .alert, actions: [action])
     }
+    
+    private func showDownloadPopup(){
+
+        let title = "Downloads"
+        let text = "\n" + "stopped"
+        let action = WKAlertAction.init(title: "Ok", style: .default, handler: {
+            print("Dismissed")
+        })
+        
+        //TODO: visibleInterfaceController not working after reloadRootPageControllers
+        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .alert, actions: [action])
+    }
+    
 }
 
 // MARK: - Menu Items
@@ -246,6 +269,7 @@ extension HomeInterfaceController {
             }
             
             strongSelf.downloadsButton.setHidden(tasks.isEmpty)
+            strongSelf.downloadsGroup.setHidden(tasks.isEmpty)
         }
     }
     
@@ -253,7 +277,7 @@ extension HomeInterfaceController {
         SpotifyServiceProvider.shared.getPlaylists { [weak self] result in
             guard let strongSelf = self, case .success(let playlists) = result else {
                 if (!autoUpdate) {
-                    self?.showPopup(context:"Playlists", success:false)
+                    self?.showPlaylistPopup(context:"Playlists", success:false)
                 }
                 return
             }
@@ -277,7 +301,7 @@ extension HomeInterfaceController {
                 }
                 NSLog("Playlists updated")
                 if (!autoUpdate) {
-                    self?.showPopup(context:"Playlists", success:true)
+                    self?.showPlaylistPopup(context:"Playlists", success:true)
                 }
             }
         }

@@ -183,6 +183,7 @@ extension DownloadManager {
 
 extension NSNotification.Name {
     
+    public static let downloadManagerTaskStop = NSNotification.Name("DownloadManagerTaskStop")
     public static let downloadManagerTaskChanges = NSNotification.Name("DownloadManagerTaskChanges")
     public static let downloadManagerTaskProgressUpdate = NSNotification.Name("DownloadManagerTaskProgressUpdate")
 }

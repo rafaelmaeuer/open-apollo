@@ -1,10 +1,10 @@
 # Apollo
 
-A Spotify player for watchOS.
+A Spotify player for watchOS with streaming mode and offline playback.
 
 The goal of open sourcing this project is to motivate Spotify to add playback support to their watchOS app. I'm not planning to offering any support on building/installing the app to your Apple Watch so please avoid opening issue around these topics.
 
-![Apollo](Images/Simulator.png)
+![Apollo](Images/Simulator-v1.1.0.png)
 
 ## Setup
 
@@ -20,14 +20,45 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 
 4. Build & Run :)
 
+## Functions
+
+- Online-Playback (Streaming Mode)
+- Offline-Playback (Offline-Mode)
+- Explore Playlists, Artists and Tracks
+- Search for Playlists, Artists and Tracks
+- Configuration in Settings
+
+## Interaction
+
+- Offline Mode: enable/disable in Settings
+- Shuffle Mode: enable/disable in Settings
+- Update Playlists: longPress on Playlists
+- Download Playlists: longPress on Playlist
+- Delete Cache: in Settings -> Local Storage
+- Delete Downloads: in Settings -> Local Storage
+- Volume: turn Digital Crown while in playback
+
+*Note: Playlists only appear if they are marked as favorite*
+
 ## Improvements
 
+### TODO
+
+- [ ] Add option to update downloaded playlists
+- [ ] Set audio quality in settings (320/160 kbits)
+- [ ] Add cover art in background of audio player
+- [ ] Fix buttons in download confirmation prompt
+- [ ] Fix Downloads appearance after completion
+
+### Done
+
+- [X] Updated menu icons
+- [X] Replacement of Force-Touch (deprecation)
+- [X] Update for iOS 14 and watchOS 7
 - [X] New spinner animation while loading
 - [X] Invert colors of logout buttons
 - [X] Handle error if FileID is not found
 - [X] Confirmation popups on local storage deletion
 - [X] Update playlists with long press on playlists button
 - [X] Add Feedback view for update or deletion
-- [ ] Add playlist update for downloads in settings
-- [ ] Set audio quality in settings (320/160 kbits)
-- [ ] Add cover art in background of audio player
+- [X] Update for iOS 13 and watchOS 6

@@ -143,14 +143,14 @@ extension AboutViewController {
     
     private func presentEmailViewController() {
         guard MFMailComposeViewController.canSendMail() else {
-            UIApplication.shared.open(URL(string: "mailto:feedback@awas.app?subject=Apollo%20Feedback")!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: "mailto:apollo@rafaelmaeuer.de?subject=Apollo%20App%20Feedback")!, options: [:], completionHandler: nil)
             return
         }
         
         let viewController = MFMailComposeViewController()
         viewController.mailComposeDelegate = self
-        viewController.setToRecipients(["feedback@awas.app"])
-        viewController.setSubject("Apollo Feedback")
+        viewController.setToRecipients(["apollo@rafaelmaeuer.de"])
+        viewController.setSubject("Apollo App Feedback")
         if let appVersion = self.appVersion {
             viewController.setMessageBody("\n\n======\nVersion: \(appVersion)", isHTML: false)
         }

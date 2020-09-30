@@ -51,6 +51,7 @@ extension AppSession {
     
     func reloadWithOfflineMode() {
         offline = true
+        UserPreferences.offline = true
         transitionToHomeScreen()
     }
     
@@ -129,7 +130,9 @@ extension AppSession {
                 WKAlertAction(
                     title: "OK",
                     style: .cancel,
-                    handler: {}
+                    handler: {
+                        print("Dismissed")
+                    }
                 )
             ]
         )

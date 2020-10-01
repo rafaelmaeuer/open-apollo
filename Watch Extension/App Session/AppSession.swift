@@ -115,6 +115,7 @@ extension AppSession {
             return
         }
         
+        //TODO: use this as basic alert view for all other alerts
         WKExtension.shared().visibleInterfaceController?.presentAlert(
             withTitle: "Oops",
             message: error.localizedDescription,

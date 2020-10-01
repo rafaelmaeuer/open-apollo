@@ -60,7 +60,7 @@ extension DownloadPlaylistInterfaceController {
                     strongSelf.loadingIndicator.stopAnimating()
                     strongSelf.loadingIndicator.setHidden(true)
                     strongSelf.titleLabel.setText("Download Started")
-                    strongSelf.messageLabel.setText("Downloading \"\(strongSelf.playlist.name)\" now.\n\nPlease make sure the app remains open until the download complete. You can check the progress under Downloads section.")
+                    strongSelf.messageLabel.setText("Downloading \"\(strongSelf.playlist.name)\" now.\n\nPlease make sure the app remains open until all downloads completed. You can check the progress in Downloads section.")
                 }
             case .failure(let error):
                 DebugServices.presentMessage(String(describing: error))

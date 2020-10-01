@@ -1711,7 +1711,6 @@
 				CC7EB713215F299F006713B5 /* Sources */,
 				CC7EB714215F299F006713B5 /* Frameworks */,
 				CC7EB715215F299F006713B5 /* Resources */,
-				CC2330D72517FF4200F13316 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

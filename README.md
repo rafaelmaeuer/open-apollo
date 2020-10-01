@@ -11,12 +11,14 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 1. Figure out an implementation for the [server](Server.md) e.g. [open-apollo-server](https://github.com/lgruen/open-apollo-server)
 
 2. Register an App at https://developer.spotify.com/dashboard/applications
-    - Enter your App Bundle ID and App Redirect URI under settings
+
+   - Enter your App Bundle ID and App Redirect URI under settings
 
 3. Replace all the placeholders in the project with real information.
-    - Go to Apollo/Configuration
-    - In `DefaultServiceConfiguration.swift` enter your server endpoints
-    - In `SpotifyAuthorizationContext.swift` enter your Spotify Client ID, App URL-Scheme and App Redirect URI
+
+   - Go to Apollo/Configuration
+   - In `DefaultServiceConfiguration.swift` enter your server endpoints
+   - In `SpotifyAuthorizationContext.swift` enter your Spotify Client ID, App URL-Scheme and App Redirect URI
 
 4. Build & Run :)
 
@@ -38,7 +40,7 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 - Delete Downloads: in Settings -> Local Storage
 - Volume: turn Digital Crown while in playback
 
-*Note: Playlists only appear if they are marked as favorite*
+_Note: Playlists only appear if they are marked as favorite_
 
 ## Improvements
 
@@ -48,17 +50,19 @@ The goal of open sourcing this project is to motivate Spotify to add playback su
 - [ ] Set audio quality in settings (320/160 kbits)
 - [ ] Add cover art in background of audio player
 - [ ] Fix buttons in download confirmation prompt
-- [ ] Fix Downloads appearance after completion
 
 ### Done
 
-- [X] Updated menu icons
-- [X] Replacement of Force-Touch (deprecation)
-- [X] Update for iOS 14 and watchOS 7
-- [X] New spinner animation while loading
-- [X] Invert colors of logout buttons
-- [X] Handle error if FileID is not found
-- [X] Confirmation popups on local storage deletion
-- [X] Update playlists with long press on playlists button
-- [X] Add Feedback view for update or deletion
-- [X] Update for iOS 13 and watchOS 6
+- [x] Add playback info in large complication
+- [x] Downloads in foreground mode (speed)
+- [x] Fix Downloads appearance after completion
+- [x] Updated menu icons
+- [x] Replacement of Force-Touch (deprecation)
+- [x] Update for iOS 14 and watchOS 7
+- [x] New spinner animation while loading
+- [x] Invert colors of logout buttons
+- [x] Handle error if FileID is not found
+- [x] Confirmation popups on local storage deletion
+- [x] Update playlists with long press on playlists button
+- [x] Add Feedback view for update or deletion
+- [x] Update for iOS 13 and watchOS 6

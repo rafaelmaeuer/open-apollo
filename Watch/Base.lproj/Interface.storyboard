@@ -565,7 +565,7 @@
                                 <label alignment="center" verticalAlignment="center" text="Preparing…" textAlignment="center" id="y51-zC-z9J">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <label alignment="center" verticalAlignment="center" text="Please keep your Apple Watch screen on and stay at this page while we prepare to download the playlist." textAlignment="center" numberOfLines="0" id="avG-CC-w5R"/>
+                                <label alignment="center" verticalAlignment="center" text="Please keep your Apple Watch screen on and stay at this page while preparing to download the playlist." textAlignment="center" numberOfLines="0" id="avG-CC-w5R"/>
                             </items>
                         </group>
                     </items>

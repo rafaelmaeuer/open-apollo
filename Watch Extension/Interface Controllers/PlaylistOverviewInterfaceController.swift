@@ -57,11 +57,11 @@ class PlaylistOverviewInterfaceController: WKInterfaceController {
         
         let title = "Download"
         let text = "\n" + playlist.name
-        let cancel = WKAlertAction.init(title: "Ok", style: .cancel, handler: {
+        let cancel = WKAlertAction.init(title: "Start", style: .cancel, handler: {
             print("Start Download")
             self.didTapDownload()
         })
-        let ok = WKAlertAction.init(title: "Cancel", style: .default, handler: {
+        let ok = WKAlertAction.init(title: "Cancel", style: .destructive, handler: {
             print("Cancel Download")
         })
 

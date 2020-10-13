@@ -13,12 +13,16 @@ class SettingsInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var shuffleSwitch: WKInterfaceSwitch!
     @IBOutlet weak var offlineSwitch: WKInterfaceSwitch!
+    @IBOutlet weak var versionText: WKInterfaceLabel!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         shuffleSwitch.setOn(UserPreferences.shuffle)
         offlineSwitch.setOn(UserPreferences.offline)
+        
+        let versionAndBuild = Bundle.versionAndBuild
+        versionText.setText(versionAndBuild)
     }
 
     override func willActivate() {
@@ -60,4 +64,24 @@ extension SettingsInterfaceController {
 extension NSNotification.Name {
     
     public static let appStateOfflineChange = NSNotification.Name("AppStateOfflineChanged")
+}
+
+// MARK: - App Version
+public extension Bundle {
+
+    static var version: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    }
+
+    static var build: String? {
+        return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
+    }
+
+    static var versionAndBuild: String? {
+        guard let version = Bundle.version,
+              let build = Bundle.build else {
+            return nil
+        }
+        return version == build ? "v\(version)" : "v\(version) (b\(build))"
+    }
 }

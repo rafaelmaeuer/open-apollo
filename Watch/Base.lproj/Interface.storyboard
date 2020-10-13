@@ -431,14 +431,22 @@
                                 <action selector="didToggleOffline:" destination="axV-5O-ytJ" id="Nt9-VF-xE9"/>
                             </connections>
                         </switch>
+                        <group width="1" height="28" alignment="left" id="N9R-yx-gqJ" userLabel="Version Group">
+                            <items>
+                                <label alignment="center" verticalAlignment="bottom" text="App Version" id="jK8-wr-oWx">
+                                    <fontDescription key="font" type="system" pointSize="15"/>
+                                </label>
+                            </items>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="offlineSwitch" destination="Lhd-Q3-GIg" id="F4V-NG-Gf2"/>
                         <outlet property="shuffleSwitch" destination="4tb-4t-mOv" id="eFq-k2-eig"/>
+                        <outlet property="versionText" destination="jK8-wr-oWx" id="bUJ-sc-ugz"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="86" y="1086"/>
+            <point key="canvasLocation" x="85.629629629629633" y="1085.1522842639592"/>
         </scene>
         <!--Local Storage-->
         <scene sceneID="f06-L2-M2k">

@@ -25,16 +25,6 @@ class DownloadsInterfaceController: WKInterfaceController {
             object: DownloadManager.shared
         )
         
-        //TODO: Check why this is not working
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(cancelAllDownloadTasks),
-            name: .downloadManagerTaskStop,
-            object: nil
-        )
-        
-        //TODO: Find alternative for WatchOS7
-        //addMenuItem(with: .decline, title: "Cancel All", action: #selector(cancelAllDownloadTasks))
         updateTasks()
     }
 
@@ -55,15 +45,15 @@ class DownloadsInterfaceController: WKInterfaceController {
 
 // MARK: - Action
 
-extension DownloadsInterfaceController {
-    
-    @objc
-    private func cancelAllDownloadTasks() {
-        for task in tasks {
-            task.cancel()
-        }
-    }
-}
+//extension DownloadsInterfaceController {
+//
+//    @objc
+//    public func cancelAllDownloadTasks() {
+//        for task in tasks {
+//            task.cancel()
+//        }
+//    }
+//}
 
 // MARK: - Update
 

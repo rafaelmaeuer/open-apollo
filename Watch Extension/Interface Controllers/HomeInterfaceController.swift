@@ -149,10 +149,7 @@ extension HomeInterfaceController {
     
     @IBAction func didLongPressDownloadsButton(gesture:WKGestureRecognizer) {
         if gesture.state == .ended {
-            NSLog("Stop Downloads…")
-            //TODO: Check why this is not working
-            NotificationCenter.default.post(name: .downloadManagerTaskStop, object: nil)
-            //showDownloadPopup()
+            downloadManagerStop()
         }
     }
     
@@ -181,8 +178,8 @@ extension HomeInterfaceController {
     
     private func showDownloadPopup(){
 
-        let title = "Downloads"
-        let text = "\n" + "stopped"
+        let title = "Success"
+        let text = "\n" + "All Downloads canceled"
         let action = WKAlertAction.init(title: "Ok", style: .default, handler: {
             print("Dismissed")
         })
@@ -273,6 +270,12 @@ extension HomeInterfaceController {
             strongSelf.downloadsButton.setHidden(tasks.isEmpty)
             strongSelf.downloadsGroup.setHidden(tasks.isEmpty)
         }
+    }
+    
+    private func downloadManagerStop() {
+        DownloadManager.shared.stopDownloads()
+        print("All Downloads stopped")
+        showDownloadPopup()
     }
     
     private func updatePlaylists(autoUpdate: Bool) {

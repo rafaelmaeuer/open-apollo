@@ -62,6 +62,14 @@ public class DownloadManager: NSObject {
         }
     }
     
+    public func stopDownloads() {
+        self.getCurrentTasks { tasks in
+            for task in tasks {
+                task.cancel()
+            }
+        }
+    }
+    
     private func startDownload(with serviceProvider: SpotifyServiceProvider, playlist: Playlist, tracksInfo: [TrackFileInfo], completion: @escaping (Result<Void>) -> Void) {
         guard !tracksInfo.isEmpty else {
             completion(.failure(E.unknownError))

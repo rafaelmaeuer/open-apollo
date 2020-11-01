@@ -45,27 +45,29 @@ class PlaylistOverviewInterfaceController: WKInterfaceController {
         SpotifyPlayer.shared.playPlaylist(playlist, from: self)
     }
     
-    @IBAction func didLongPressPlaylist() {
-        showPopup()
+    @IBAction func didLongPressPlaylist(gesture:WKGestureRecognizer) {
+        if gesture.state == .ended {
+            showDownloadPopup()
+        }
     }
     
     deinit {
         imageTask?.cancel()
     }
 
-    func showPopup(){
+    func showDownloadPopup(){
         
         let title = "Download"
         let text = "\n" + playlist.name
-        let cancel = WKAlertAction.init(title: "Start", style: .cancel, handler: {
+        let cancel = WKAlertAction.init(title: "Cancel", style: .cancel, handler: {
+            print("Cancel Download")
+        })
+        let ok = WKAlertAction.init(title: "Start", style: .default, handler: {
             print("Start Download")
             self.didTapDownload()
         })
-        let ok = WKAlertAction.init(title: "Cancel", style: .destructive, handler: {
-            print("Cancel Download")
-        })
 
-        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .actionSheet, actions: [ok,cancel])
+        WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .actionSheet, actions: [cancel,ok])
     }
 }
 

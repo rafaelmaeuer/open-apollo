@@ -116,9 +116,11 @@ extension HomeInterfaceController {
         playlistTable.performSegue(forRow: 0)
     }
     
-    @IBAction func didLongPressPlaylistButton() {
-        NSLog("Update playlists…")
-        updatePlaylists(autoUpdate: false)
+    @IBAction func didLongPressPlaylistButton(gesture:WKGestureRecognizer) {
+        if gesture.state == .ended {
+            NSLog("Update playlists…")
+            updatePlaylists(autoUpdate: false)
+        }
     }
     
     @IBAction func didTapExploreButton() {
@@ -145,11 +147,13 @@ extension HomeInterfaceController {
         pushController(withName: "Downloads", context: nil)
     }
     
-    @IBAction func didLongPressDownloadsButton() {
-        NSLog("Stop Downloads…")
-        //TODO: Check why this is not working
-        NotificationCenter.default.post(name: .downloadManagerTaskStop, object: nil)
-        //showDownloadPopup()
+    @IBAction func didLongPressDownloadsButton(gesture:WKGestureRecognizer) {
+        if gesture.state == .ended {
+            NSLog("Stop Downloads…")
+            //TODO: Check why this is not working
+            NotificationCenter.default.post(name: .downloadManagerTaskStop, object: nil)
+            //showDownloadPopup()
+        }
     }
     
     @IBAction func didTapSettingsButton() {
@@ -172,7 +176,6 @@ extension HomeInterfaceController {
             print("Dismissed")
         })
         
-        //TODO: visibleInterfaceController not working after reloadRootPageControllers
         WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .alert, actions: [action])
     }
     
@@ -184,7 +187,6 @@ extension HomeInterfaceController {
             print("Dismissed")
         })
         
-        //TODO: visibleInterfaceController not working after reloadRootPageControllers
         WKExtension.shared().visibleInterfaceController?.presentAlert(withTitle: title, message: text, preferredStyle: .alert, actions: [action])
     }
     

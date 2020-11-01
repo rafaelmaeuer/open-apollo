@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17156" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17506" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lmt-8M-VN1" pageOrientation="vertical">
     <device id="watch40"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17034"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17500"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -74,9 +74,9 @@
                                 </button>
                             </items>
                             <gestureRecognizers>
-                                <longPressGestureRecognizer id="TJY-9l-IQJ">
+                                <longPressGestureRecognizer delaysTouchesEnded="NO" id="TJY-9l-IQJ">
                                     <connections>
-                                        <action selector="didLongPressPlaylistButton" destination="HWe-PW-0Lp" id="gZE-KY-Wu7"/>
+                                        <action selector="didLongPressPlaylistButtonWithGesture:" destination="HWe-PW-0Lp" id="Get-a0-4H9"/>
                                     </connections>
                                 </longPressGestureRecognizer>
                             </gestureRecognizers>
@@ -132,7 +132,7 @@
                             <gestureRecognizers>
                                 <longPressGestureRecognizer id="72X-Ka-l94">
                                     <connections>
-                                        <action selector="didLongPressDownloadsButton" destination="HWe-PW-0Lp" id="MHt-cO-rmS"/>
+                                        <action selector="didLongPressDownloadsButtonWithGesture:" destination="HWe-PW-0Lp" id="c7v-Xe-qou"/>
                                     </connections>
                                 </longPressGestureRecognizer>
                             </gestureRecognizers>
@@ -548,7 +548,7 @@
                             <gestureRecognizers>
                                 <longPressGestureRecognizer id="rfI-Me-f2W">
                                     <connections>
-                                        <action selector="didLongPressPlaylist" destination="z20-MY-xRr" id="MyN-oI-VIa"/>
+                                        <action selector="didLongPressPlaylistWithGesture:" destination="z20-MY-xRr" id="HOl-De-qPh"/>
                                     </connections>
                                 </longPressGestureRecognizer>
                             </gestureRecognizers>

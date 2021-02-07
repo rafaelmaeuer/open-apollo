@@ -173,17 +173,6 @@ extension LocalStorageManager {
         }
     }
     
-    //TODO: transform favorites in playlist format
-//    func saveFavorites(_ playlist: SimplifiedPlaylist) {
-//        let targetUrl = playlistStorageLocation().appendingPathComponent(playlist.id)
-//
-//        do {
-//            let jsonData = try JSONEncoder().encode(playlist)
-//            try jsonData.write(to: targetUrl, options: [])
-//        } catch {
-//            NSLog("Write Failure: \(error)")
-//        }
-//    }
 }
 
 // MARK: - Track

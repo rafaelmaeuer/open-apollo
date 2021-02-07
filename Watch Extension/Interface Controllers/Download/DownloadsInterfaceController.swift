@@ -43,18 +43,6 @@ class DownloadsInterfaceController: WKInterfaceController {
     }
 }
 
-// MARK: - Action
-
-//extension DownloadsInterfaceController {
-//
-//    @objc
-//    public func cancelAllDownloadTasks() {
-//        for task in tasks {
-//            task.cancel()
-//        }
-//    }
-//}
-
 // MARK: - Update
 
 extension DownloadsInterfaceController {
@@ -82,7 +70,6 @@ extension DownloadsInterfaceController {
     private func updateTable() {
         tasksTable.setNumberOfRows(tasks.count, withRowType: "DownloadTask")
         
-        //TODO: when downloads complete notify MainInterfaceController to hide download button 
         for (idx, task) in tasks.enumerated() {
             let rowController = tasksTable.rowController(at: idx) as! DownloadTaskRowController
             rowController.configure(with: task)

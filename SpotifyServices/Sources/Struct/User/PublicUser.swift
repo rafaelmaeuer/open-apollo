@@ -13,4 +13,11 @@ public struct PublicUser: Codable {
     public let displayName: String?
     public let images: [Image]?
     public let followers: Followers?
+    
+    public init(id: String, displayName: String?, images: [Image]?, followers: Followers?) {
+            self.id = id
+            self.displayName = displayName
+            self.images = images
+            self.followers = followers
+        }
 }

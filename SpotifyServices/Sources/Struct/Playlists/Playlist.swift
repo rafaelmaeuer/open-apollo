@@ -20,6 +20,20 @@ public struct Playlist: Codable {
     
     public let collaborative: Bool
     public let tracks: Paginated<PlaylistTrack>
+    
+    public init(id: String, name: String, owner: PublicUser, description: String?, images: [Image], followers: Followers, collaborative: Bool, tracks: Paginated<PlaylistTrack>) {
+        self.id = id
+        self.name = name
+        self.owner = owner
+        
+        self.description = description
+        self.images = images
+        
+        self.followers = followers
+        
+        self.collaborative = collaborative
+        self.tracks = tracks
+    }
 }
 
 extension Playlist: AnyPlaylist {}

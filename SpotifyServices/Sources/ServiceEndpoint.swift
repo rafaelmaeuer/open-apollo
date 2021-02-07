@@ -11,6 +11,7 @@ import Foundation
 enum ServiceEndpoint {
     case userProfile
     case recentlyPlayed
+    case myTracks
     case myPlaylists
     case playlist(String)
     case album(String)
@@ -31,6 +32,8 @@ extension ServiceEndpoint {
             return URL(string: "https://api.spotify.com/v1/me")!
         case .recentlyPlayed:
             return URL(string: "https://api.spotify.com/v1/me/player/recently-played")!
+        case .myTracks:
+            return URL(string: "https://api.spotify.com/v1/me/tracks")!
         case .myPlaylists:
             return URL(string: "https://api.spotify.com/v1/me/playlists")!
         case .playlist(let id):

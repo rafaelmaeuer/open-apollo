@@ -1699,6 +1699,8 @@
 			dependencies = (
 			);
 			name = "SpotifyServices iOS";
+			packageProductDependencies = (
+			);
 			productName = SpotifyServices;
 			productReference = CC7EB702215F2935006713B5 /* SpotifyServices.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1718,6 +1720,8 @@
 				5323FE8524731E0200B62241 /* PBXTargetDependency */,
 			);
 			name = "SpotifyServices watchOS";
+			packageProductDependencies = (
+			);
 			productName = SpotifyServices;
 			productReference = CC7EB719215F299F006713B5 /* SpotifyServices.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1832,6 +1836,8 @@
 				CCE124E42162023C0012D2AB /* PBXTargetDependency */,
 			);
 			name = Apollo;
+			packageProductDependencies = (
+			);
 			productName = Apollo;
 			productReference = CCF8D776215B6D47001CDEFD /* Apollo.app */;
 			productType = "com.apple.product-type.application";
@@ -1871,6 +1877,8 @@
 				CCE124E0216202350012D2AB /* PBXTargetDependency */,
 			);
 			name = "Watch Extension";
+			packageProductDependencies = (
+			);
 			productName = "Watch Extension";
 			productReference = CCF8D799215B6DCA001CDEFD /* Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -1916,6 +1924,7 @@
 					};
 					CCF8D78C215B6DCA001CDEFD = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1220;
 					};
 					CCF8D798215B6DCA001CDEFD = {
 						CreatedOnToolsVersion = 10.0;
@@ -1937,6 +1946,8 @@
 				Base,
 			);
 			mainGroup = CCF8D76D215B6D47001CDEFD;
+			packageReferences = (
+			);
 			productRefGroup = CCF8D777215B6D47001CDEFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3261,18 +3272,25 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7C2EXSD3YV;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.awas.Apollo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 7.0;
@@ -3284,12 +3302,18 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7C2EXSD3YV;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.awas.Apollo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

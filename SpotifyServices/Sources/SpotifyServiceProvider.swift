@@ -159,6 +159,41 @@ extension SpotifyServiceProvider {
 
 extension SpotifyServiceProvider {
     
+    public func getFavorites(offset: Int = 0, completionHandler: @escaping (Result<Paginated<PlaylistTrack>>) -> Void) {
+        guard let userSession = userSession else {
+            completionHandler(.failure(E.missingUserSession))
+            return
+        }
+        
+        if userSession.isExpired {
+            updateAccessToken { [weak self] result in
+                switch result {
+                case .success(let userSession):
+                    self?.getFavorites(offset: offset, with: userSession.authorizationValue, completionHandler: completionHandler)
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
+            }
+        } else {
+            getFavorites(offset: offset, with: userSession.authorizationValue, completionHandler: completionHandler)
+        }
+    }
+    
+    private func getFavorites(offset: Int, with authorizationValue: String, completionHandler: @escaping (Result<Paginated<PlaylistTrack>>) -> Void) {
+        var requestUrlBuilder = URLComponents(url: ServiceEndpoint.myTracks.url, resolvingAgainstBaseURL: false)
+        requestUrlBuilder!.queryItems = [
+            URLQueryItem(name: "offset", value: "\(offset)"),
+            URLQueryItem(name: "limit", value: "50")
+        ]
+        
+        var request = URLRequest(url: requestUrlBuilder!.url!)
+        
+        request.httpMethod = "GET"
+        request.setValue(authorizationValue, forHTTPHeaderField: "Authorization")
+        
+        urlSession.getResponse(for: request, responseType: Paginated<PlaylistTrack>.self, responseHandler: completionHandler)
+    }
+    
     public func getPlaylists(offset: Int = 0, completionHandler: @escaping (Result<Paginated<SimplifiedPlaylist>>) -> Void) {
         guard let userSession = userSession else {
             completionHandler(.failure(E.missingUserSession))

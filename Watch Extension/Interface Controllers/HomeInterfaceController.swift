@@ -305,11 +305,45 @@ extension HomeInterfaceController {
                     strongSelf.hasPendingPlaylistsRequest = false
                 }
                 NSLog("Playlists updated")
+                self?.getFavoriteSongs(autoUpdate: autoUpdate)
                 if (!autoUpdate) {
                     self?.showPlaylistPopup(context:"Playlists", success:true)
                 }
             }
         }
+    }
+    
+    private func getFavoriteSongs(autoUpdate: Bool) {
+        SpotifyServiceProvider.shared.getFavorites { [weak self] result in
+            guard let strongSelf = self, case .success(let favorites) = result else {
+                return
+            }
+                
+            DownloadManager.shared.getFavoriteSimplePlaylist(favorites: favorites) {
+                favList in
+           
+                var playlistItems = self?.playlists
+                var playlistCount = self?.playlists?.count
+
+                playlistCount! += 1
+                playlistItems!.insert(favList, at: 1)
+
+                strongSelf.playlists = playlistItems
+                strongSelf.playlistTable.setNumberOfRows(playlistCount!, withRowType: "PlaylistRow")
+                NSLog("Favorites updated")
+            }
+        }
+    }
+    
+    func toDict() -> [String:Any] {
+        var dict = [String:Any]()
+        let otherSelf = Mirror(reflecting: self)
+        for child in otherSelf.children {
+            if let key = child.label {
+                dict[key] = child.value
+            }
+        }
+        return dict
     }
     
     private func updateSearchSuggestions() {

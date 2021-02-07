@@ -67,19 +67,36 @@ class SpotifyPlayer {
         }
         
         group.enter()
-        SpotifyServiceProvider.shared.getPlaylist(id) { fullPlaylistResult in
-            guard case .success(let fullPlaylist) = fullPlaylistResult else {
+        if (id == "saved-tracks-playlist") {
+            SpotifyServiceProvider.shared.getFavorites() { fullPlaylistResult in
+                guard case .success(let fullPlaylist) = fullPlaylistResult else {
+                    group.leave()
+                    return
+                }
+                
+                audioTracks = fullPlaylist.items.compactMap { SpotifyServiceProvider.shared.audioTrack(for: $0.track, offlineOnly: AppSession.shared.offline) }
+                
+                if UserPreferences.shuffle {
+                    audioTracks?.shuffle()
+                }
+                
                 group.leave()
-                return
             }
-            
-            audioTracks = fullPlaylist.tracks.items.compactMap { SpotifyServiceProvider.shared.audioTrack(for: $0.track, offlineOnly: AppSession.shared.offline) }
-            
-            if UserPreferences.shuffle {
-                audioTracks?.shuffle()
+        } else {
+            SpotifyServiceProvider.shared.getPlaylist(id) { fullPlaylistResult in
+                guard case .success(let fullPlaylist) = fullPlaylistResult else {
+                    group.leave()
+                    return
+                }
+                
+                audioTracks = fullPlaylist.tracks.items.compactMap { SpotifyServiceProvider.shared.audioTrack(for: $0.track, offlineOnly: AppSession.shared.offline) }
+                
+                if UserPreferences.shuffle {
+                    audioTracks?.shuffle()
+                }
+                
+                group.leave()
             }
-            
-            group.leave()
         }
         
         group.notify(queue: .main) {

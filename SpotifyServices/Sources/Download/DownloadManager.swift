@@ -39,25 +39,86 @@ public class DownloadManager: NSObject {
         }
     }
     
-    public func download(with serviceProvider: SpotifyServiceProvider, playlist: SimplifiedPlaylist, completion: @escaping (Result<Void>) -> Void) {
-        serviceProvider.getPlaylist(playlist.id) { [weak self] result in
+    public func getFavoriteSimplePlaylist(favorites: Paginated<PlaylistTrack>, completion: @escaping (_ favList: SimplifiedPlaylist) -> ()) {
+            
+        let favList = SimplifiedPlaylist(
+            id: "saved-tracks-playlist",
+            name: "Saved Tracks",
+            images: [Image(url: URL(string: "https://cdn.veerle.world/apollo/saved-tracks.png")!, width: nil, height: nil)],
+            collaborative: false,
+            tracks: SimplifiedPlaylist.TracksLink(href: URL(string: favorites.href)!, total: favorites.total)
+        )
+        completion(favList)
+    }
+    
+    private func getFavoritePlaylist(with serviceProvider: SpotifyServiceProvider, favorites: Paginated<PlaylistTrack>, completion: @escaping (_ favList: Playlist) -> ()) {
+        
+        serviceProvider.getUser() { result in
+            
             switch result {
-            case .success(let playlist):
-                LocalStorageManager.shared.savePlaylist(playlist)
-                serviceProvider.tracksInfo(
-                    for: Array(playlist.tracks.items.filter { !$0.isLocal }.map { $0.track.id }.prefix(upTo: min(30, playlist.tracks.items.count))),
-                    completionHandler: { tracksInfoResult in
-                        switch tracksInfoResult {
-                        case .success(let tracksInfo):
-                            self?.startDownload(with: serviceProvider, playlist: playlist, tracksInfo: tracksInfo, completion: completion)
-                        case .failure(let error):
-                            completion(.failure(error))
-                        }
-                    }
+            case .success(let user):
+                
+                let favList = Playlist(
+                    id: "saved-tracks-playlist",
+                    name: "Saved Tracks",
+                    owner: PublicUser(id: user.id, displayName: user.displayName!, images: user.images, followers: user.followers),
+                    description: "User favorite saved tracks",
+                    images: [Image(url: URL(string: "https://cdn.veerle.world/apollo/saved-tracks.png")!, width: nil, height: nil)],
+                    followers: user.followers,
+                    collaborative: false,
+                    tracks: favorites
                 )
-                break
+                completion(favList)
             case .failure(let error):
-                completion(.failure(error))
+                print("ERROR:", error)
+            }
+        }
+    }
+    
+    public func download(with serviceProvider: SpotifyServiceProvider, playlist: SimplifiedPlaylist, completion: @escaping (Result<Void>) -> Void) {
+        if (playlist.id == "saved-tracks-playlist") {
+            serviceProvider.getFavorites() { [weak self] result in
+                switch result {
+                case .success(let favorites):
+                    self?.getFavoritePlaylist(with: serviceProvider, favorites: favorites) { favList in
+                        LocalStorageManager.shared.savePlaylist(favList)
+                        serviceProvider.tracksInfo(
+                            for: Array(favList.tracks.items.filter { !($0.isLocal ?? false) }.map { $0.track.id }.prefix(upTo: min(30, favList.tracks.items.count))),
+                            completionHandler: { tracksInfoResult in
+                                switch tracksInfoResult {
+                                case .success(let tracksInfo):
+                                    self?.startDownload(with: serviceProvider, playlist: favList, tracksInfo: tracksInfo, completion: completion)
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                }
+                            }
+                        )
+                    }
+                    break
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } else {
+            serviceProvider.getPlaylist(playlist.id) { [weak self] result in
+                switch result {
+                case .success(let playlist):
+                    LocalStorageManager.shared.savePlaylist(playlist)
+                    serviceProvider.tracksInfo(
+                        for: Array(playlist.tracks.items.filter { !($0.isLocal ?? false) }.map { $0.track.id }.prefix(upTo: min(30, playlist.tracks.items.count))),
+                        completionHandler: { tracksInfoResult in
+                            switch tracksInfoResult {
+                            case .success(let tracksInfo):
+                                self?.startDownload(with: serviceProvider, playlist: playlist, tracksInfo: tracksInfo, completion: completion)
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    )
+                    break
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -81,7 +142,7 @@ public class DownloadManager: NSObject {
         var trackMaps: [String: Track] = [:]
         
         for track in playlist.tracks.items {
-            guard !track.isLocal else {
+            guard !(track.isLocal ?? false) else {
                 continue
             }
             
